@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for( 'static', filename='style.css' ) }}" />
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>KeyBright Testing</title>
+        {% endif %}
+    </head>
+    <body>
+        <form class="centered_form" action="/" method="POST" enctype="multipart/form-data">
+            <h1>Customer Info</h1>
+            <input type="text" name="email" placeholder="Email" />
+            <br/>
+            <input type="text" name="first_name" placeholder="First Name" />
+            <br/>
+            <input type="text" name="last_name" placeholder="Last Name" />
+            <br/>
+            <input type="text" name="address" placeholder="Address" />
+            <br/>
+            <input type="text" name="city" placeholder="City" />
+            <br/>
+            <input type="text" name="zip_code" placeholder="Zip Code" />
+            <br/>
+            <input type="submit" value="Request Quote"/>
+        </form>
+        <h1>Customers</h1>
+        <table>
+            <tr>
+                <th>email</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>address</th>
+                <th>city</th>
+                <th>zip code</th>
+            </tr>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.first_name }}</td>
+                <td>{{ customer.last_name }}</td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.city }}</td>
+                <td>{{ customer.zip_code }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form class="centered_form" action="/clear-customers" method="POST" enctype="multipart/form-data">
+            <input type="submit" value="Clear Customers"/>
+        </form>
+    </body>
+</html>
