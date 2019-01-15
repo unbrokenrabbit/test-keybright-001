@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+    web:
+        container_name: "keybright-test-web"
+        build: ./money-flask
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./:/project
+        networks:
+            - keybright-test
+        command: python3 /project/app.py
+    -mongodb:
+        container_name: "keybright-test--mongodb"
+        image: "mongo:3.6.0"
+        volumes:
+            - keybright-test-mongodb-data:/data/db
+            - keybright-test-mongodb-config:/data/configdb
+        networks:
+            - keybright-test
+volumes:
+    keybright-test-mongodb-data:
+    keybright-test-mongodb-config:
+networks:
+    keybright-test:
+        name: keybright-test
